@@ -1,0 +1,65 @@
+Node*intersected(Node*head)
+{
+    if(head==NULL)
+    {
+        return NULL;
+    }
+    if(head->next==NULL)
+    {
+        return NULL;
+    }
+    Node*slow=head;
+    Node*fast=head;
+    while(slow!=NULL && fast!=NULL)
+    {
+        
+       fast=fast->next;
+       if(fast!=NULL)
+       {
+           fast=fast->next;
+       }
+       slow=slow->next;
+       if(slow==fast)
+       {
+           return slow;
+       }
+        
+    }
+    return NULL;
+    
+}
+
+class Solution
+{
+    public:
+    //Function to remove a loop in the linked list.
+    void removeLoop(Node* head)
+    {
+
+
+Node*intersection=intersected(head);
+
+if(intersection==NULL)
+{
+    return;
+}
+
+
+Node*slow=head;
+while(slow!=intersection)
+{
+    slow=slow->next;
+    intersection=intersection->next;
+}
+
+Node*startnode=slow;
+Node*temp=startnode->next;
+while(temp->next!=startnode)
+{
+    temp=temp->next;
+}
+
+temp->next=NULL;
+
+    }
+};
